@@ -6,6 +6,11 @@ SCHEMA="org.gnome.settings-daemon.plugins.media-keys"
 CURRENT="$(gsettings get "$SCHEMA" custom-keybindings)"
 UPDATED="$(sed "s|'$BASE'||g; s|, ,|,|g; s|\[, |[|g; s|, \]|]|g" <<<"$CURRENT")"
 gsettings set "$SCHEMA" custom-keybindings "$UPDATED"
-rm -f "$HOME/.local/bin/look4" "$DATA_HOME/applications/br.com.look4.LinkChecker.desktop" "$DATA_HOME/autostart/br.com.look4.LinkChecker.desktop"
+rm -f "$HOME/.local/bin/look4" \
+      "$DATA_HOME/applications/br.com.look4.LinkChecker.desktop" \
+      "$DATA_HOME/autostart/br.com.look4.LinkChecker.desktop" \
+      "$DATA_HOME/icons/hicolor/scalable/apps/br.com.look4.LinkChecker.svg"
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+  gtk-update-icon-cache -f -t "$DATA_HOME/icons/hicolor" 2>/dev/null || true
+fi
 echo "Look4 removido. A chave permanece no chaveiro do sistema."
-

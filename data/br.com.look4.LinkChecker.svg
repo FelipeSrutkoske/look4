@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#241b4b" />
+      <stop offset="100%" stop-color="#0b0818" />
+    </radialGradient>
+
+    <!-- Border Gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d04dff" />
+      <stop offset="50%" stop-color="#7c5cff" />
+      <stop offset="100%" stop-color="#3eb2ff" />
+    </linearGradient>
+
+    <!-- Head Gradient -->
+    <linearGradient id="headGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+
+    <!-- Ear / Detail Gradient -->
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748b" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+
+    <!-- Visor Gradient -->
+    <linearGradient id="visorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <!-- Neon Cyan Eye Glow -->
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="35%" stop-color="#38bdf8" />
+      <stop offset="70%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Antenna Orb Glow -->
+    <radialGradient id="antennaGlow" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff71ce" />
+      <stop offset="70%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </radialGradient>
+
+    <!-- Drop Shadow for Squircle -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <!-- Outer Glow for Face -->
+    <filter id="neonFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Base Squircle (App Icon Standard) -->
+  <rect x="32" y="32" width="448" height="448" rx="108" fill="url(#bgGlow)" filter="url(#dropShadow)" />
+  <rect x="32" y="32" width="448" height="448" rx="108" fill="none" stroke="url(#borderGrad)" stroke-width="6" stroke-opacity="0.85" />
+
+  <!-- Grid accent lines behind the robot -->
+  <line x1="120" y1="410" x2="392" y2="410" stroke="#7c5cff" stroke-width="2" stroke-opacity="0.25" />
+  <line x1="80" y1="440" x2="432" y2="440" stroke="#7c5cff" stroke-width="2" stroke-opacity="0.15" />
+
+  <!-- Antenna Stick -->
+  <rect x="246" y="96" width="20" height="58" rx="10" fill="url(#metalGrad)" />
+  <line x1="256" y1="100" x2="256" y2="150" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Antenna Ball -->
+  <circle cx="256" cy="94" r="24" fill="url(#antennaGlow)" filter="url(#neonFilter)" />
+  <circle cx="250" cy="88" r="7" fill="#ffffff" opacity="0.8" />
+
+  <!-- Neck -->
+  <rect x="216" y="386" width="80" height="34" rx="8" fill="url(#metalGrad)" />
+  <line x1="236" y1="392" x2="236" y2="414" stroke="#1e293b" stroke-width="4" stroke-linecap="round" />
+  <line x1="256" y1="392" x2="256" y2="414" stroke="#1e293b" stroke-width="4" stroke-linecap="round" />
+  <line x1="276" y1="392" x2="276" y2="414" stroke="#1e293b" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Ears / Bolts -->
+  <rect x="74" y="222" width="34" height="90" rx="14" fill="url(#metalGrad)" />
+  <rect x="80" y="238" width="10" height="58" rx="5" fill="#38bdf8" opacity="0.75" />
+
+  <rect x="404" y="222" width="34" height="90" rx="14" fill="url(#metalGrad)" />
+  <rect x="422" y="238" width="10" height="58" rx="5" fill="#38bdf8" opacity="0.75" />
+
+  <!-- Robot Head Exterior -->
+  <rect x="96" y="142" width="320" height="252" rx="72" fill="url(#headGrad)" />
+
+  <!-- Head Specular Highlight -->
+  <path d="M 160 146 Q 256 154 352 146 Q 360 170 348 184 Q 256 172 164 184 Z" fill="#ffffff" opacity="0.45" />
+
+  <!-- Visor Frame / Recess -->
+  <rect x="126" y="180" width="260" height="152" rx="44" fill="#030712" />
+
+  <!-- Visor Glass -->
+  <rect x="132" y="186" width="248" height="140" rx="38" fill="url(#visorGrad)" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Eyes / Lenses Glow Effect -->
+  <!-- Left Eye -->
+  <circle cx="196" cy="254" r="38" fill="#0284c7" opacity="0.4" filter="url(#neonFilter)" />
+  <circle cx="196" cy="254" r="28" fill="url(#eyeGlow)" />
+  <circle cx="196" cy="254" r="14" fill="#ffffff" />
+  <!-- Left Eye Sparkle -->
+  <circle cx="204" cy="246" r="5" fill="#ffffff" />
+
+  <!-- Right Eye -->
+  <circle cx="316" cy="254" r="38" fill="#0284c7" opacity="0.4" filter="url(#neonFilter)" />
+  <circle cx="316" cy="254" r="28" fill="url(#eyeGlow)" />
+  <circle cx="316" cy="254" r="14" fill="#ffffff" />
+  <!-- Right Eye Sparkle -->
+  <circle cx="324" cy="246" r="5" fill="#ffffff" />
+
+  <!-- HUD Reticle / Scanner Marks on Visor -->
+  <path d="M 148 206 L 160 206 L 160 218" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.5" stroke-linecap="round" />
+  <path d="M 364 206 L 352 206 L 352 218" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.5" stroke-linecap="round" />
+  <path d="M 148 306 L 160 306 L 160 294" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.5" stroke-linecap="round" />
+  <path d="M 364 306 L 352 306 L 352 294" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.5" stroke-linecap="round" />
+
+  <!-- Mouth / Grille -->
+  <line x1="216" y1="358" x2="296" y2="358" stroke="#334155" stroke-width="6" stroke-linecap="round" />
+  <circle cx="236" cy="358" r="3" fill="#38bdf8" opacity="0.8" />
+  <circle cx="256" cy="358" r="3" fill="#38bdf8" opacity="0.8" />
+  <circle cx="276" cy="358" r="3" fill="#38bdf8" opacity="0.8" />
+</svg>
