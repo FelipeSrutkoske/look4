@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Look4 — Verificador de links
+Comment=Consulte links no VirusTotal
+Exec=look4
+Icon=security-high
+Terminal=false
+Categories=Network;Utility;Security;
+StartupNotify=true
+

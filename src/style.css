@@ -1,0 +1,285 @@
+/* ---------- base / reset ---------- */
+window.look4-window,
+window.look4-dialog {
+  background: %BG%;
+  color: %TXT%;
+  font-family: %FONT%;
+}
+window.look4-dialog {
+  background: linear-gradient(160deg, %D1% 0%, %D2% 55%, %D3% 100%);
+}
+window.look4-popup.look4-popup {
+  background: transparent;
+  box-shadow: none;
+  font-family: %FONT%;
+  color: %TXT%;
+}
+window.look4-window button,
+window.look4-dialog button,
+window.look4-popup button {
+  background-image: none;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  outline: none;
+  transition: all 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+window.look4-window button:focus-visible,
+window.look4-dialog button:focus-visible,
+window.look4-popup button:focus-visible {
+  outline: 2px solid rgba(%ACC_RGB%, 0.7);
+  outline-offset: 2px;
+}
+window.look4-window selection,
+window.look4-dialog selection,
+window.look4-popup selection {
+  background-color: rgba(%GLOW_RGB%, 0.55);
+  color: #ffffff;
+}
+tooltip, tooltip.background {
+  background: rgba(%CARD_RGB%, 0.97);
+  color: %TXT%;
+  border: 1px solid rgba(%LINE_RGB%, 0.3);
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+/* ---------- header ---------- */
+headerbar.look4-headerbar {
+  background: %BG%;
+  background-image: none;
+  border: none;
+  border-bottom: 1px solid rgba(%LINE_RGB%, 0.14);
+  box-shadow: none;
+  min-height: 46px;
+  color: %TXT%;
+}
+headerbar.look4-headerbar:backdrop { background: %BG%; }
+headerbar.look4-headerbar.look4-flat { border-bottom: none; background: transparent; }
+.look4-brand { font-weight: 800; font-size: 15px; letter-spacing: 1px; color: %TXT%; }
+headerbar.look4-headerbar windowcontrols button {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  box-shadow: none;
+  border-radius: 999px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0;
+  margin: 0 3px;
+  color: %SUB%;
+}
+headerbar.look4-headerbar windowcontrols button:hover { background: rgba(255, 255, 255, 0.14); color: #ffffff; }
+headerbar.look4-headerbar windowcontrols button.close:hover { background: #ff4d7d; color: #ffffff; }
+
+button.look4-icon-button.look4-icon-button {
+  color: %ACC%;
+  background: rgba(%ACC_RGB%, 0.07);
+  border: 1px solid rgba(%ACC_RGB%, 0.24);
+  border-radius: 10px;
+  box-shadow: none;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
+}
+button.look4-icon-button.look4-icon-button:hover {
+  color: #ffffff;
+  background: rgba(%ACC_RGB%, 0.17);
+  border-color: rgba(%ACC_RGB%, 0.55);
+}
+image.look4-icon-button {
+  color: %ACC%;
+  background: rgba(%ACC_RGB%, 0.08);
+  border: 1px solid rgba(%ACC_RGB%, 0.24);
+  border-radius: 12px;
+}
+
+/* ---------- hero ---------- */
+.look4-hero-title { font-size: 30px; font-weight: 800; color: #ffffff; }
+.look4-hero-sub { font-size: 14px; color: %SUB%; }
+.look4-hero-badge {
+  color: %ACC%;
+  background: rgba(%ACC_RGB%, 0.08);
+  border: 1px solid rgba(%ACC_RGB%, 0.28);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* ---------- entries ---------- */
+.look4-url-frame { background: transparent; }
+entry.look4-entry.look4-entry {
+  color: %TXT%;
+  caret-color: %ACC%;
+  background: rgba(%CARD_RGB%, 0.98);
+  background-image: none;
+  border: none;
+  border-radius: 13px;
+  box-shadow: none;
+  outline: none;
+  padding: 0 14px;
+  min-height: 46px;
+  font-size: 15px;
+}
+entry.look4-entry.look4-entry:focus,
+entry.look4-entry.look4-entry:focus-within {
+  background: rgba(%CARD_RGB%, 1.0);
+  box-shadow: none;
+  outline: none;
+}
+entry.look4-entry.look4-entry > text > placeholder { color: rgba(%SUB_RGB%, 0.5); }
+entry.look4-entry.look4-entry > image { color: %SUB%; margin: 0 4px; }
+entry.look4-entry.look4-entry > image:hover { color: #ffffff; }
+
+entry.look4-entry.look4-entry.look4-plain {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(%LINE_RGB%, 0.24);
+}
+entry.look4-entry.look4-entry.look4-plain:focus-within {
+  border-color: rgba(%ACC_RGB%, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(%ACC_RGB%, 0.12);
+}
+
+/* ---------- buttons ---------- */
+button.look4-primary.look4-primary {
+  color: #ffffff;
+  background: linear-gradient(120deg, %G1% 0%, %G2% 50%, %G3% 100%);
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(%GLOW_RGB%, 0.38), inset 0 1px rgba(255, 255, 255, 0.25);
+  padding: 0 26px;
+  min-height: 48px;
+  font-weight: 700;
+  font-size: 15px;
+}
+button.look4-primary.look4-primary:hover {
+  background: linear-gradient(120deg, %H1% 0%, %H2% 50%, %H3% 100%);
+  box-shadow: 0 10px 36px rgba(%GLOW_RGB%, 0.58), inset 0 1px rgba(255, 255, 255, 0.3);
+}
+button.look4-primary.look4-primary:active { box-shadow: 0 3px 14px rgba(%GLOW_RGB%, 0.4); }
+button.look4-primary.look4-primary.look4-small { min-height: 40px; padding: 0 20px; font-size: 14px; border-radius: 11px; }
+
+button.look4-ghost.look4-ghost {
+  color: %TXT%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(%LINE_RGB%, 0.22);
+  border-radius: 11px;
+  box-shadow: none;
+  padding: 0 18px;
+  min-height: 40px;
+  font-weight: 600;
+}
+button.look4-ghost.look4-ghost:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(%LINE_RGB%, 0.5);
+}
+
+button.look4-fab.look4-fab {
+  color: %SUB%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(%LINE_RGB%, 0.24);
+  border-radius: 999px;
+  box-shadow: none;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+}
+button.look4-fab.look4-fab:hover { color: #ffffff; background: rgba(%GLOW_RGB%, 0.25); border-color: rgba(%LINE_RGB%, 0.5); }
+
+/* ---------- theme picker ---------- */
+button.look4-theme-card.look4-theme-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(%LINE_RGB%, 0.2);
+  border-radius: 14px;
+  box-shadow: none;
+  padding: 8px;
+}
+button.look4-theme-card.look4-theme-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(%LINE_RGB%, 0.45); }
+button.look4-theme-card.look4-theme-card:checked {
+  background: rgba(%ACC_RGB%, 0.10);
+  border-color: %ACC%;
+  box-shadow: 0 0 0 2px rgba(%ACC_RGB%, 0.18);
+}
+.look4-swatch { border-radius: 9px; min-height: 40px; min-width: 70px; }
+.look4-swatch-retro { background: linear-gradient(120deg, #c64dff 0%, #7c5cff 50%, #3eb2ff 100%); }
+.look4-swatch-terminator { background: linear-gradient(120deg, #ff2d2d 0%, #b80000 55%, #ffffff 100%); }
+.look4-swatch-joker { background: linear-gradient(120deg, #a43cff 0%, #6a3fd6 50%, #39e07a 100%); }
+.look4-theme-name { font-size: 12px; font-weight: 700; color: %TXT%; }
+
+/* ---------- text ---------- */
+.look4-subtle { color: %SUB%; font-size: 13px; }
+.look4-hint { color: %SUB%; font-size: 13px; }
+.look4-hint.look4-hint-error { color: #ff8fae; }
+.look4-hint.look4-hint-ok { color: #7ff0d6; }
+.look4-kbd {
+  color: %TXT%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 1px 7px;
+  font-size: 12px;
+  font-family: monospace;
+}
+.look4-status { color: %TXT%; font-size: 15px; font-weight: 500; }
+.look4-panel-title { color: #ffffff; font-size: 19px; font-weight: 800; }
+.look4-field-label { color: %SUB%; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+
+/* ---------- quick popup ---------- */
+.look4-popup-box {
+  background: linear-gradient(160deg, %D1% 0%, %D2% 60%, %D3% 100%);
+  border: 1px solid rgba(%LINE_RGB%, 0.35);
+  border-radius: 20px;
+  margin: 26px;
+  padding: 20px 22px 22px 22px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6), 0 0 44px rgba(%GLOW_RGB%, 0.28);
+}
+
+/* ---------- result card ---------- */
+.look4-card {
+  background: rgba(%CARD_RGB%, 0.9);
+  border: 1px solid rgba(%LINE_RGB%, 0.22);
+  border-radius: 22px;
+  padding: 22px 24px 20px 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.38);
+}
+.look4-card.look4-safe { border-color: rgba(63, 242, 207, 0.45); box-shadow: 0 20px 60px rgba(63, 242, 207, 0.10); }
+.look4-card.look4-warn { border-color: rgba(255, 200, 77, 0.55); box-shadow: 0 20px 60px rgba(255, 200, 77, 0.10); }
+.look4-card.look4-alert { border-color: rgba(255, 92, 141, 0.65); box-shadow: 0 20px 60px rgba(255, 60, 120, 0.18); }
+.look4-verdict { font-size: 21px; font-weight: 800; }
+.look4-safe .look4-verdict { color: #3ff2cf; }
+.look4-warn .look4-verdict { color: #ffc84d; }
+.look4-alert .look4-verdict { color: #ff5c8d; }
+.look4-result-sub { color: %SUB%; font-size: 13px; }
+.look4-url-chip {
+  color: %SUB%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-family: monospace;
+  font-size: 12px;
+}
+.look4-tile {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 12px 6px 10px 6px;
+}
+.look4-stat-num { font-size: 22px; font-weight: 800; color: %TXT%; }
+.look4-stat-label { font-size: 11px; font-weight: 600; color: %SUB%; }
+.look4-dot { min-width: 8px; min-height: 8px; border-radius: 999px; }
+.look4-tile-mal .look4-dot { background: #ff5c8d; }
+.look4-tile-sus .look4-dot { background: #ffc84d; }
+.look4-tile-har .look4-dot { background: #3ff2cf; }
+.look4-tile-und .look4-dot { background: #8b86a8; }
+.look4-tile-mal .look4-stat-num { color: #ff5c8d; }
+.look4-tile-sus .look4-stat-num { color: #ffc84d; }
+.look4-tile-har .look4-stat-num { color: #3ff2cf; }
+.look4-meta { color: %SUB%; font-size: 12px; }
+
+/* ---------- misc ---------- */
+.look4-rgb-bar { min-height: 3px; }
+.look4-orb { background: transparent; }
