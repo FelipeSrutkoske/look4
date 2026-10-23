@@ -37,6 +37,20 @@ impl ksni::Tray for Look4Tray {
             }
             .into(),
             StandardItem {
+                label: "Verificar área de transferência (Vírus)".into(),
+                icon_name: "security-high-symbolic".into(),
+                activate: Box::new(|_| launch("--scan-clipboard")),
+                ..Default::default()
+            }
+            .into(),
+            StandardItem {
+                label: "Rastrear área de transferência (Link Final)".into(),
+                icon_name: "insert-link-symbolic".into(),
+                activate: Box::new(|_| launch("--trace-clipboard")),
+                ..Default::default()
+            }
+            .into(),
+            StandardItem {
                 label: "Abrir Look4".into(),
                 icon_name: "window-new-symbolic".into(),
                 activate: Box::new(|_| launch("--show-window")),
@@ -57,8 +71,7 @@ impl ksni::Tray for Look4Tray {
 
 /// Draws a friendly robot head and converts it to the ARGB32 (network order) format of StatusNotifier.
 fn robot_icon(size: i32) -> ksni::Icon {
-    let mut surface =
-        ImageSurface::create(Format::ARgb32, size, size).expect("cairo surface");
+    let mut surface = ImageSurface::create(Format::ARgb32, size, size).expect("cairo surface");
     {
         let cx = Context::new(&surface).expect("cairo context");
         cx.scale(size as f64 / 64.0, size as f64 / 64.0);
@@ -79,11 +92,9 @@ fn robot_icon(size: i32) -> ksni::Icon {
             ]);
             let a = (px >> 24) & 0xff;
             let unpremultiply = |c: u32| -> u8 {
-                if a == 0 {
-                    0
-                } else {
-                    ((c * 255 + a / 2) / a).min(255) as u8
-                }
+                (c * 255 + a / 2)
+                    .checked_div(a)
+                    .map_or(0, |v| v.min(255) as u8)
             };
             data.extend_from_slice(&[
                 a as u8,

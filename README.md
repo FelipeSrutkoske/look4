@@ -1,6 +1,6 @@
 # Look4
 
-> **Verificador rápido de links com a API do VirusTotal para GNOME / Linux.**
+> **Verificador rápido de links com análise de segurança (VirusTotal) e rastreamento de link final (redirecionador) para GNOME / Linux.**
 
 ---
 
@@ -44,7 +44,9 @@ O instalador irá:
 - Instalar o binário em `~/.local/bin/look4`.
 - Criar o lançador no menu de aplicativos do GNOME.
 - Ativar o autostart na inicialização do sistema.
-- Configurar o atalho global <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>V</kbd>.
+- Configurar os atalhos globais:
+  - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>V</kbd> para verificação de vírus
+  - <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>R</kbd> para rastreamento de link final
 
 3. **Inicie o aplicativo:**
    Abra pelo menu de aplicativos ou execute:

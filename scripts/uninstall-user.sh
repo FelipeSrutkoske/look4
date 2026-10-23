@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-BASE="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/look4/"
+BASE_VIRUS="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/look4/"
+BASE_REDIRECT="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/look4-redirect/"
 SCHEMA="org.gnome.settings-daemon.plugins.media-keys"
 CURRENT="$(gsettings get "$SCHEMA" custom-keybindings)"
-UPDATED="$(sed "s|'$BASE'||g; s|, ,|,|g; s|\[, |[|g; s|, \]|]|g" <<<"$CURRENT")"
+UPDATED="$(sed "s|'$BASE_VIRUS'||g; s|'$BASE_REDIRECT'||g; s|, ,|,|g; s|\[, |[|g; s|, \]|]|g" <<<"$CURRENT")"
 gsettings set "$SCHEMA" custom-keybindings "$UPDATED"
 rm -f "$HOME/.local/bin/look4" \
       "$DATA_HOME/applications/br.com.look4.LinkChecker.desktop" \

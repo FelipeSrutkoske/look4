@@ -7,3 +7,6 @@
 .env.*
 !.env.example
 *.log
+
+# Specs locais de planejamento
+/spec/

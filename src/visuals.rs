@@ -70,6 +70,14 @@ impl Theme {
         }
     }
 
+    pub fn redirect_badge(self) -> &'static str {
+        match self {
+            Theme::Retro => "LOOK4 REDIRECT",
+            Theme::Terminator => "REDIRECT TRACE PROTOCOL",
+            Theme::Joker => "Search 4 Destination",
+        }
+    }
+
     fn palette(self) -> Palette {
         match self {
             Theme::Retro => Palette {
@@ -127,10 +135,12 @@ fn unit(c: Rgb) -> (f64, f64, f64) {
     (c.0 as f64 / 255.0, c.1 as f64 / 255.0, c.2 as f64 / 255.0)
 }
 
+type ThemeListener = Box<dyn Fn(Theme)>;
+
 thread_local! {
     static CURRENT: Cell<Theme> = const { Cell::new(Theme::Retro) };
     static PROVIDER: RefCell<Option<gtk::CssProvider>> = const { RefCell::new(None) };
-    static LISTENERS: RefCell<Vec<Box<dyn Fn(Theme)>>> = RefCell::new(Vec::new());
+    static LISTENERS: RefCell<Vec<ThemeListener>> = RefCell::new(Vec::new());
 }
 
 pub fn current() -> Theme {
@@ -397,7 +407,12 @@ fn draw_terminator_background(cx: &Context, w: f64, h: f64, t: f64) {
     cx.set_line_width(2.0);
     cx.set_source_rgba(1.0, 0.25, 0.2, 0.6);
     let (m, l) = (16.0, 26.0);
-    for (cx0, cy0, dx, dy) in [(m, m, 1.0, 1.0), (w - m, m, -1.0, 1.0), (m, h - m, 1.0, -1.0), (w - m, h - m, -1.0, -1.0)] {
+    for (cx0, cy0, dx, dy) in [
+        (m, m, 1.0, 1.0),
+        (w - m, m, -1.0, 1.0),
+        (m, h - m, 1.0, -1.0),
+        (w - m, h - m, -1.0, -1.0),
+    ] {
         cx.move_to(cx0 + dx * l, cy0);
         cx.line_to(cx0, cy0);
         cx.line_to(cx0, cy0 + dy * l);
@@ -443,14 +458,18 @@ fn draw_joker_background(cx: &Context, w: f64, h: f64, t: f64) {
     for i in 0..16 {
         let seed = i as f64;
         let speed = 0.022 + hash(seed + 3.0) * 0.026;
-        let u = (t * speed + hash(seed) ).rem_euclid(1.0);
+        let u = (t * speed + hash(seed)).rem_euclid(1.0);
         let base_x = 0.12 + hash(seed + 7.0) * 0.76;
         let x = w * (base_x + 0.10 * (t * 0.35 + seed * 1.3 + u * 4.0).sin());
         let y = h * (1.2 - 1.45 * u);
         let radius = size * (0.26 + 0.34 * u) * (0.9 + 0.2 * hash(seed + 11.0));
         let fade = (PI * u).sin().powf(0.8);
         let alpha = 0.17 * fade;
-        let (r, g, b) = if i % 2 == 0 { (0.55, 0.2, 0.95) } else { (0.2, 0.9, 0.5) };
+        let (r, g, b) = if i % 2 == 0 {
+            (0.55, 0.2, 0.95)
+        } else {
+            (0.2, 0.9, 0.5)
+        };
         let puff = RadialGradient::new(x, y, 0.0, x, y, radius);
         puff.add_color_stop_rgba(0.0, r, g, b, alpha);
         puff.add_color_stop_rgba(0.55, r, g, b, alpha * 0.45);
@@ -460,7 +479,14 @@ fn draw_joker_background(cx: &Context, w: f64, h: f64, t: f64) {
         let _ = cx.fill();
     }
 
-    let vignette = RadialGradient::new(w * 0.5, h * 0.5, size * 0.4, w * 0.5, h * 0.5, w.max(h) * 0.78);
+    let vignette = RadialGradient::new(
+        w * 0.5,
+        h * 0.5,
+        size * 0.4,
+        w * 0.5,
+        h * 0.5,
+        w.max(h) * 0.78,
+    );
     vignette.add_color_stop_rgba(0.0, 0.0, 0.0, 0.0, 0.0);
     vignette.add_color_stop_rgba(1.0, 0.0, 0.0, 0.0, 0.5);
     let _ = cx.set_source(&vignette);
@@ -659,7 +685,13 @@ fn draw_scanner(cx: &Context, width: f64, height: f64, time: f64) {
     cx.set_line_cap(gtk::cairo::LineCap::Round);
     cx.set_source_rgba(1.0, 1.0, 1.0, 0.95);
     cx.set_line_width(core * 0.11);
-    cx.arc(mx - core * 0.08, my - core * 0.08 + bob, core * 0.34, 0.0, TAU);
+    cx.arc(
+        mx - core * 0.08,
+        my - core * 0.08 + bob,
+        core * 0.34,
+        0.0,
+        TAU,
+    );
     let _ = cx.stroke();
     cx.move_to(mx + core * 0.17, my + core * 0.17 + bob);
     cx.line_to(mx + core * 0.46, my + core * 0.46 + bob);
@@ -667,6 +699,7 @@ fn draw_scanner(cx: &Context, width: f64, height: f64, time: f64) {
     cx.set_line_cap(gtk::cairo::LineCap::Butt);
 }
 
+#[allow(clippy::too_many_arguments)]
 fn comet(
     cx: &Context,
     mx: f64,
@@ -678,7 +711,7 @@ fn comet(
     to: (f64, f64, f64),
     thickness: f64,
 ) {
-    const SEGMENTS: usize = 28;
+    const SEGMENTS: usize = 14;
     cx.set_line_cap(gtk::cairo::LineCap::Round);
     for s in 0..SEGMENTS {
         let f0 = s as f64 / SEGMENTS as f64;
@@ -686,7 +719,13 @@ fn comet(
         let color = mix(from, to, f0);
         cx.set_source_rgba(color.0, color.1, color.2, f0.powf(1.6));
         cx.set_line_width(thickness * (0.35 + 0.65 * f0));
-        cx.arc(mx, my, radius, angle + sweep * f0, angle + sweep * f1 + 0.02);
+        cx.arc(
+            mx,
+            my,
+            radius,
+            angle + sweep * f0,
+            angle + sweep * f1 + 0.02,
+        );
         let _ = cx.stroke();
     }
     let head = angle + sweep;
@@ -772,11 +811,23 @@ pub fn result_charts() -> (gtk::DrawingArea, gtk::DrawingArea, SharedChart) {
     (gauge, bar, data)
 }
 
-fn center_text(cx: &Context, x: f64, y: f64, text: &str, size: f64, bold: bool, c: (f64, f64, f64, f64)) {
+fn center_text(
+    cx: &Context,
+    x: f64,
+    y: f64,
+    text: &str,
+    size: f64,
+    bold: bool,
+    c: (f64, f64, f64, f64),
+) {
     cx.select_font_face(
         "Sans",
         FontSlant::Normal,
-        if bold { FontWeight::Bold } else { FontWeight::Normal },
+        if bold {
+            FontWeight::Bold
+        } else {
+            FontWeight::Normal
+        },
     );
     cx.set_font_size(size);
     if let Ok(extents) = cx.text_extents(text) {
@@ -824,7 +875,15 @@ fn draw_gauge(cx: &Context, w: f64, h: f64, data: ChartData) {
 
     let flagged = data.malicious + data.suspicious;
     let shown = (flagged as f64 * progress).round() as u32;
-    center_text(cx, mx, my + 8.0, &shown.to_string(), 36.0, true, (verdict.0, verdict.1, verdict.2, 1.0));
+    center_text(
+        cx,
+        mx,
+        my + 8.0,
+        &shown.to_string(),
+        36.0,
+        true,
+        (verdict.0, verdict.1, verdict.2, 1.0),
+    );
     center_text(
         cx,
         mx,
